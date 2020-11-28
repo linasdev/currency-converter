@@ -28,14 +28,14 @@ public class App implements Runnable {
 
     @Option(
         names = { "-r", "--rates" },
-        description = "CSV file containing the exchange rates.",
+        description = "CSV file containing the exchange rates (default: ${DEFAULT-VALUE}).",
         defaultValue = "./exchange_rates.csv",
         paramLabel = "file") 
     private File exchangeRateDatabase;
 
     @Option(
         names = { "-b", "--base" },
-        description = "Identifier of the base currency.",
+        description = "Identifier of the base currency (default: ${DEFAULT-VALUE}).",
         defaultValue = "EUR",
         paramLabel = "currency") 
     private String baseCurrency;
