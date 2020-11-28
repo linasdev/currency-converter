@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import picocli.CommandLine;
@@ -55,6 +56,34 @@ public class App implements Runnable {
     public void run() {
         Converter converter = new Converter(baseCurrency, CONVERTER_SCALE, CONVERTER_ROUNDING_MODE);
         loadExchangeRates(converter);
+
+        List<String> unknownCurrencies = new ArrayList<>();
+
+        for (ConversionRequest request : conversionRequests) {
+            if (!converter.isCurrencyRegistered(request.targetCurrency))
+                unknownCurrencies.add(request.targetCurrency);
+
+            if (!converter.isCurrencyRegistered(request.sourceCurrency))
+                unknownCurrencies.add(request.sourceCurrency);
+        }
+
+        if (unknownCurrencies.size() != 0) {
+            System.err.println("The following currencies are unknown:");
+            for (String identifier : unknownCurrencies)
+                System.err.println(identifier);
+
+            System.exit(-1);
+        }
+
+        for (ConversionRequest request : conversionRequests) {
+            BigDecimal result = converter.convert(
+                request.targetCurrency,
+                request.sourceCurrency,
+                request.amount
+            );
+
+            System.out.println(result);
+        }
     }
 
     public static void main(String[] args) {
