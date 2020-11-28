@@ -49,6 +49,9 @@ public class App implements Runnable {
         paramLabel = "currency") 
     private String baseCurrency;
 
+    @Option(names = { "-v", "--verbose" }, description = "Verbose output.")
+    private boolean verbose;
+
     @ArgGroup(exclusive = false, multiplicity = "1..*")
     private List<ConversionRequest> conversionRequests;
 
@@ -82,7 +85,17 @@ public class App implements Runnable {
                 request.amount
             );
 
-            System.out.println(result);
+            if (verbose) {
+                System.out.format(
+                    "%s%s -> %s%s%n",
+                    request.amount,
+                    request.sourceCurrency,
+                    result,
+                    request.targetCurrency
+                );
+            } else {
+                System.out.println(result);
+            }
         }
     }
 
