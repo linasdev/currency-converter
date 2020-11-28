@@ -1,8 +1,6 @@
 package com.linasdev.currency_converter;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,14 +8,20 @@ import java.util.Map;
 public class Converter {
     private String baseCurrency;
     private Map<String, BigDecimal> exchangeRates;
+    private int scale;
+    private RoundingMode roundingMode;
 
     /**
      * Constructs a new converter.
      * 
      * @param baseCurrency a unique identifier for the base currency, not null
+     * @param scale precision of all calculation results, not null
+     * @param roundingMode rounding to use for all calculations, not null
      */
-    public Converter(String baseCurrency) {
+    public Converter(String baseCurrency, int scale, RoundingMode roundingMode) {
         this.baseCurrency = baseCurrency;
+        this.scale = scale;
+        this.roundingMode = roundingMode;
         exchangeRates = new HashMap<>();
 
         exchangeRates.put(baseCurrency, BigDecimal.ONE);
@@ -64,8 +68,7 @@ public class Converter {
         BigDecimal sourceRate = exchangeRates.get(sourceCurrency);
 
         BigDecimal baseAmount = sourceAmount.multiply(sourceRate);
-        // TODO: use proper math context;
-        BigDecimal targetAmount = baseAmount.divide(targetRate, RoundingMode.DOWN);
+        BigDecimal targetAmount = baseAmount.divide(targetRate, scale, roundingMode);
 
         return targetAmount;
     }
