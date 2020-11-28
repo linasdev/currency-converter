@@ -47,14 +47,14 @@ public class Converter {
      * 
      * @param targetCurrency unique identifier of target currency, not null
      * @param sourceCurrency unique identifier of source currency, not null
-     * @param sourceAmount amount of source currency, not null
+     * @param amount amount of source currency, not null
      * @return amount of target currency
      * @throws IllegalArgumentException if either of the currencies is not registered.
      */
     public BigDecimal convert(
         String targetCurrency,
         String sourceCurrency,
-        BigDecimal sourceAmount)
+        BigDecimal amount)
     {
         if (!exchangeRates.containsKey(targetCurrency)) {
             throw new IllegalArgumentException("Target currency is not registered.");
@@ -67,7 +67,7 @@ public class Converter {
         BigDecimal targetRate = exchangeRates.get(targetCurrency);
         BigDecimal sourceRate = exchangeRates.get(sourceCurrency);
 
-        BigDecimal baseAmount = sourceAmount.multiply(sourceRate);
+        BigDecimal baseAmount = amount.multiply(sourceRate);
         BigDecimal targetAmount = baseAmount.divide(targetRate, scale, roundingMode);
 
         return targetAmount;
