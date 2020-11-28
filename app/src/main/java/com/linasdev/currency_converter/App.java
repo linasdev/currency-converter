@@ -89,6 +89,14 @@ public class App implements Runnable {
                         continue;
                     }
 
+                    if (converter.isCurrencyRegistered(identifier)) {
+                        System.err.format(
+                            "Invalid exchange rate database format (reused identifier on line %d).",
+                            i
+                        );
+                        System.exit(-1);
+                    }
+
                     converter.registerCurrency(identifier, exchangeRate);
                 } catch (NumberFormatException e) {
                     if (i == 1) { // First line could be a header.
@@ -97,12 +105,6 @@ public class App implements Runnable {
 
                     System.err.format(
                         "Invalid exchange rate database format (invalid number format on line %d).",
-                        i
-                    );
-                    System.exit(-1);
-                } catch (IllegalArgumentException e) {
-                    System.err.format(
-                        "Invalid exchange rate database format (reused identifier on line %d).",
                         i
                     );
                     System.exit(-1);

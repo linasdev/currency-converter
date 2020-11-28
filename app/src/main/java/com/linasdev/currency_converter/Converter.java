@@ -43,6 +43,16 @@ public class Converter {
     }
 
     /**
+     * Checks if a currency is registered.
+     * 
+     * @param identifier a unique identifier for the currency, not null
+     * @return true if identifier is already used, false otherwise
+     */
+    public boolean isCurrencyRegistered(String identifier) {
+        return exchangeRates.containsKey(identifier);
+    }
+
+    /**
      * Calculates amount of target currency equivalent to the specified amount of source currency.
      * 
      * @param targetCurrency unique identifier of the target currency, not null
