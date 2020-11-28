@@ -22,6 +22,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
+
+    // Used for CLI argument parsing
+    implementation 'info.picocli:picocli:4.5.2'
 }
 
 application {
