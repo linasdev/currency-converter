@@ -33,6 +33,13 @@ public class App implements Runnable {
         paramLabel = "file") 
     private File exchangeRateDatabase;
 
+    @Option(
+        names = { "-b", "--base" },
+        description = "Identifier of the base currency.",
+        defaultValue = "EUR",
+        paramLabel = "currency") 
+    private String baseCurrency;
+
     @ArgGroup(exclusive = false, multiplicity = "1..*")
     private List<ConversionRequest> conversionRequests;
 
