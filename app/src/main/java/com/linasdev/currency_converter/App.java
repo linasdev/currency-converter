@@ -16,10 +16,10 @@ import picocli.CommandLine.ArgGroup;
     mixinStandardHelpOptions = true)
 public class App implements Runnable {
     private static class ConversionRequest {
-        @Parameters(index = "0", description = "Identifier of target currency.")
+        @Parameters(index = "0", description = "Identifier of the target currency.")
         String sourceCurrency;
 
-        @Parameters(index = "1", description = "Identifier of source currency.")
+        @Parameters(index = "1", description = "Identifier of the source currency.")
         String targetCurrency;
 
         @Parameters(index = "2", description = "Amount of source currency.")

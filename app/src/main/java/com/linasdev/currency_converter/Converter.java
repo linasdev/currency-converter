@@ -45,8 +45,8 @@ public class Converter {
     /**
      * Calculates amount of target currency equivalent to the specified amount of source currency.
      * 
-     * @param targetCurrency unique identifier of target currency, not null
-     * @param sourceCurrency unique identifier of source currency, not null
+     * @param targetCurrency unique identifier of the target currency, not null
+     * @param sourceCurrency unique identifier of the source currency, not null
      * @param amount amount of source currency, not null
      * @return amount of target currency
      * @throws IllegalArgumentException if either of the currencies is not registered.
