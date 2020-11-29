@@ -22,7 +22,7 @@ public class Converter {
         this.baseCurrency = baseCurrency;
         this.scale = scale;
         this.roundingMode = roundingMode;
-        exchangeRates = new HashMap<>();
+        this.exchangeRates = new HashMap<>();
 
         exchangeRates.put(baseCurrency, BigDecimal.ONE);
     }
@@ -35,9 +35,8 @@ public class Converter {
      * @throws IllegalArgumentException if identifier is already used.
      */
     public void registerCurrency(String identifier, BigDecimal exchangeRate) {
-        if (exchangeRates.containsKey(identifier)) {
+        if (exchangeRates.containsKey(identifier))
             throw new IllegalArgumentException("Currency identifier already used.");
-        }
 
         exchangeRates.put(identifier, exchangeRate);
     }
@@ -66,13 +65,11 @@ public class Converter {
         String sourceCurrency,
         BigDecimal amount)
     {
-        if (!exchangeRates.containsKey(targetCurrency)) {
+        if (!exchangeRates.containsKey(targetCurrency))
             throw new IllegalArgumentException("Target currency is not registered.");
-        }
 
-        if (!exchangeRates.containsKey(sourceCurrency)) {
+        if (!exchangeRates.containsKey(sourceCurrency))
             throw new IllegalArgumentException("Source currency is not registered.");
-        }
 
         BigDecimal targetRate = exchangeRates.get(targetCurrency);
         BigDecimal sourceRate = exchangeRates.get(sourceCurrency);

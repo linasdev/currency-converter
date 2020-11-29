@@ -17,8 +17,8 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ArgGroup;
 
 @Command(
-    name = "Currency Converter",
-    version = "Currency Converter 1.0",
+    name = "currency-converter",
+    version = "currency-converter 1.0",
     mixinStandardHelpOptions = true)
 public class Cli implements Runnable {
     private static final int CONVERTER_SCALE = 18;
@@ -49,7 +49,7 @@ public class Cli implements Runnable {
         paramLabel = "currency") 
     private String baseCurrency;
 
-    @Option(names = { "-v", "--verbose" }, description = "Verbose output.")
+    @Option(names = { "-v", "--verbose" }, description = "Provide human readable output.")
     private boolean verbose;
 
     @ArgGroup(exclusive = false, multiplicity = "1..*")
@@ -105,9 +105,9 @@ public class Cli implements Runnable {
     }
 
     private void loadExchangeRates(Converter converter) {
-        try (BufferedReader reader =
-                new BufferedReader(new FileReader(exchangeRateDatabase)))
-        {    
+        // This method terminates the JVM on failure instead of rethrowing exceptions.
+        // It should be fine for this use case.
+        try (BufferedReader reader = new BufferedReader(new FileReader(exchangeRateDatabase))) {    
             String line;
             for (int i = 1; (line = reader.readLine()) != null; i++) {
                 try {
@@ -118,7 +118,7 @@ public class Cli implements Runnable {
 
                     if (parts.length != 2) {
                         System.err.format(
-                            "Invalid exchange rate database format (wrong number of delimiters on line %d).",
+                            "Invalid exchange rate database format (wrong number of delimiters on line %d).%n",
                             i
                         );
                         System.exit(-1);
@@ -127,13 +127,12 @@ public class Cli implements Runnable {
                     String identifier = parts[0];
                     BigDecimal exchangeRate = new BigDecimal(parts[1]);
 
-                    if (identifier.equals(baseCurrency)) { // Ignore exchange rates for base currency
+                    if (identifier.equals(baseCurrency)) // Ignore exchange rates for base currency
                         continue;
-                    }
 
                     if (converter.isCurrencyRegistered(identifier)) {
                         System.err.format(
-                            "Invalid exchange rate database format (reused identifier on line %d).",
+                            "Invalid exchange rate database format (reused identifier on line %d).%n",
                             i
                         );
                         System.exit(-1);
@@ -141,12 +140,11 @@ public class Cli implements Runnable {
 
                     converter.registerCurrency(identifier, exchangeRate);
                 } catch (NumberFormatException e) {
-                    if (i == 1) { // First line could be a header.
+                    if (i == 1) // First line could be a header.
                         continue;
-                    }
 
                     System.err.format(
-                        "Invalid exchange rate database format (invalid number format on line %d).",
+                        "Invalid exchange rate database format (invalid number format on line %d).%n",
                         i
                     );
                     System.exit(-1);
