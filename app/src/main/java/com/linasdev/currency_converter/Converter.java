@@ -15,7 +15,7 @@ public class Converter {
      * Constructs a new converter.
      * 
      * @param baseCurrency a unique identifier for the base currency, not null
-     * @param scale precision of all calculation results, not null
+     * @param scale scale of all calculation results, not null
      * @param roundingMode rounding to use for all calculations, not null
      */
     public Converter(String baseCurrency, int scale, RoundingMode roundingMode) {
