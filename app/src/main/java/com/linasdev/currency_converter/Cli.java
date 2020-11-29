@@ -20,7 +20,7 @@ import picocli.CommandLine.ArgGroup;
     name = "Currency Converter",
     version = "Currency Converter 1.0",
     mixinStandardHelpOptions = true)
-public class App implements Runnable {
+public class Cli implements Runnable {
     private static final int CONVERTER_SCALE = 18;
     private static final RoundingMode CONVERTER_ROUNDING_MODE = RoundingMode.DOWN;
 
@@ -100,7 +100,7 @@ public class App implements Runnable {
     }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args); 
+        int exitCode = new CommandLine(new Cli()).execute(args); 
         System.exit(exitCode);
     }
 

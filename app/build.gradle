@@ -29,5 +29,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.linasdev.currency_converter.App'
+    mainClass = 'com.linasdev.currency_converter.Cli'
 }
