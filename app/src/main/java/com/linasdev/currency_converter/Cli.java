@@ -88,13 +88,13 @@ public class Cli implements Runnable {
             if (verbose) {
                 System.out.format(
                     "%s%s -> %s%s%n",
-                    request.amount,
+                    request.amount.toPlainString(),
                     request.sourceCurrency,
-                    result,
+                    result.toPlainString(),
                     request.targetCurrency
                 );
             } else {
-                System.out.println(result);
+                System.out.println(result.toPlainString());
             }
         }
     }
