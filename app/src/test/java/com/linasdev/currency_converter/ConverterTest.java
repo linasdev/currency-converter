@@ -22,7 +22,7 @@ public class ConverterTest {
     }
     
     @Test
-    public void conversionToBaseCurrencyShouldBeCorrect() {
+    public void shouldCorrectlyConvertToBaseCurrency() {
         Converter converter = new Converter("EUR", 18, RoundingMode.DOWN);
         converter.registerCurrency("USD", new BigDecimal("0.809552722"));
 
@@ -33,7 +33,7 @@ public class ConverterTest {
     }
     
     @Test
-    public void conversionFromBaseCurrencyShouldBeCorrect() {
+    public void shouldCorrectlyConvertFromBaseCurrency() {
         Converter converter = new Converter("EUR", 18, RoundingMode.DOWN);
         converter.registerCurrency("USD", new BigDecimal("0.809552722"));
         
@@ -44,7 +44,7 @@ public class ConverterTest {
     }
     
     @Test
-    public void conversionOfArbitraryCurrenciesShouldBeCorrect() {
+    public void shouldCorrectlyConvertArbitraryCurrencies() {
         Converter converter = new Converter("EUR", 18, RoundingMode.DOWN);
         converter.registerCurrency("USD", new BigDecimal("0.809552722"));
         converter.registerCurrency("BTC", new BigDecimal("6977.089657"));
