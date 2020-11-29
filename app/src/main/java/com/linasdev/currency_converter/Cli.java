@@ -100,7 +100,9 @@ public class Cli implements Runnable {
     }
 
     public static void main(String[] args) {
-        System.exit(new CommandLine(new Cli()).execute(args));
+        int statusCode = new CommandLine(new Cli()).execute(args);
+        if (statusCode != 0)
+            System.exit(statusCode);
     }
 
     private void loadExchangeRates(Converter converter) {

@@ -25,9 +25,16 @@ dependencies {
 
     // Used for CLI argument parsing
     implementation 'info.picocli:picocli:4.5.2'
+
+    // Used for testing CLI
+    testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }
 
 application {
     // Define the main class for the application.
     mainClass = 'com.linasdev.currency_converter.Cli'
+}
+
+test {
+  testLogging.showStandardStreams = true
 }
