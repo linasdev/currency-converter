@@ -31,7 +31,7 @@ public class Converter {
      * Registers a new currency.
      * 
      * @param identifier a unique identifier for the currency, not null
-     * @param exchangeRate price of the currency in relation to the base currency, not null
+     * @param exchangeRate price of the currency in relation to the base currency, not null, >0
      * @throws IllegalArgumentException if identifier is already used.
      */
     public void registerCurrency(String identifier, BigDecimal exchangeRate) {

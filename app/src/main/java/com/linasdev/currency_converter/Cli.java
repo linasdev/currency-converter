@@ -130,6 +130,14 @@ public class Cli implements Runnable {
                     if (identifier.equals(baseCurrency)) // Ignore exchange rates for base currency
                         continue;
 
+                    if (exchangeRate.compareTo(BigDecimal.ZERO) <= 0) {
+                        System.err.format(
+                            "Invalid exchange rate database format (invalid exchange rate on line %d).%n",
+                            i
+                        );
+                        System.exit(-1);
+                    }
+
                     if (converter.isCurrencyRegistered(identifier)) {
                         System.err.format(
                             "Invalid exchange rate database format (reused identifier on line %d).%n",
