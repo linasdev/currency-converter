@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2019 Linas Nikiperavičius
+Copyright (c) 2020 Linas Nikiperavičius
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
